@@ -3,27 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profe sin aula</title>
-    <link rel="icon" type="image/png" href="favicon.png"> <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilos.css">
+    <title>Calendario Psicológico - Profe sin aula</title>
+    <link rel="icon" type="image/png" href="favicon.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos para el calendario (sin afectar al header azul) */
+        .calendar-main {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .calendar-title {
+            text-align: center;
+            color: #002d5a;
+            font-family: 'Fredoka', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #002d5a;
+        }
+
+        .day-name {
+            font-weight: bold;
+            text-align: center;
+            color: #002d5a;
+            padding-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .day {
+            min-height: 90px;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 8px;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        /* Categorías de psicología */
+        .salud-mental { background-color: #e8f5e9; border-left: 4px solid #4caf50; } /* Verde */
+        .conmemoracion { background-color: #e3f2fd; border-left: 4px solid #2196f3; } /* Azul */
+        .hito-academico { background-color: #fff3e0; border-left: 4px solid #ff9800; } /* Naranja */
+
+        .evento-label {
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: 5px;
+            line-height: 1.2;
+            color: #333;
+        }
+
+        .leyenda {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        .leyenda-item { display: flex; align-items: center; gap: 8px; }
+        .box { width: 15px; height: 15px; border-radius: 3px; }
+    </style>
 </head>
 <body>
 
 <header>
     <h1>Profe sin aula</h1>
 </header>
+
 <nav>
     <ul>
         <li><a href="index.html">Inicio</a></li>
-        
-        <li class="dropdown">
-            <a href="blog.html">Blog</a>
-            <div class="dropdown-content">
-                <a href="#">Últimos artículos</a>
-                <a href="#">Categorías</a>
-            </div>
-        </li>
-
+        <li class="dropdown"><a href="blog.html">Blog</a></li>
         <li class="dropdown">
             <a href="#">Recursos</a>
             <div class="dropdown-content">
@@ -31,24 +92,47 @@
                 <a href="#">Ejercicios</a>
             </div>
         </li>
-
         <li class="dropdown"><a href="#">Menú 3</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
-        <li class="dropdown"><a href="#">Menú 4</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
-        <li class="dropdown"><a href="#">Menú 5</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
-        <li class="dropdown"><a href="#">Menú 6</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
     </ul>
 </nav>
 
-<main>
-    <div class="carousel-container">
-        <div class="slides" id="slides">
-            <img src="img/foto1.jpg" alt="Imagen 1">
-            <img src="img/foto2.jpg" alt="Imagen 2">
-            <img src="img/foto3.jpg" alt="Imagen 3">
-            <img src="img/foto4.jpg" alt="Imagen 4">
+<main class="calendar-main">
+    <h2 class="calendar-title">Efemérides y Hitos de la Psicología</h2>
+    
+    <div class="calendar-grid">
+        <div class="day-name">Dom</div><div class="day-name">Lun</div><div class="day-name">Mar</div>
+        <div class="day-name">Mié</div><div class="day-name">Jue</div><div class="day-name">Vie</div><div class="day-name">Sáb</div>
+
+        <div class="day">1</div>
+        <div class="day conmemoracion">
+            2 <span class="evento-label">Día Mundial Autismo</span>
         </div>
-        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        <div class="day">3</div><div class="day">4</div><div class="day">5</div>
+        <div class="day salud-mental">
+            7 <span class="evento-label">Día Mundial de la Salud (OMS)</span>
+        </div>
+        <div class="day">8</div>
+
+        <div class="day">15</div><div class="day">16</div><div class="day">17</div>
+        <div class="day hito-academico">
+            18 <span class="evento-label">Aniversario NOM-035 (Riesgo Psicosocial)</span>
+        </div>
+        <div class="day">19</div><div class="day">20</div><div class="day">21</div>
+
+        <div class="day">22</div>
+        <div class="day hito-academico">
+            23 <span class="evento-label">Publicación Modelo Biopsicosocial (Engel)</span>
+        </div>
+        <div class="day">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div>
+        <div class="day conmemoracion">
+            28 <span class="evento-label">Día Seg. y Salud en el Trabajo</span>
+        </div>
+    </div>
+
+    <div class="leyenda">
+        <div class="leyenda-item"><div class="box" style="background: #2196f3;"></div> Conmemoraciones</div>
+        <div class="leyenda-item"><div class="box" style="background: #4caf50;"></div> Salud Pública</div>
+        <div class="leyenda-item"><div class="box" style="background: #ff9800;"></div> Hitos Académicos / NOMs</div>
     </div>
 </main>
 
