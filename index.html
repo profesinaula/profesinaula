@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profe sin aula</title>
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f8f9fa; }
+        header { background-color: #2c3e50; color: white; padding: 1rem; text-align: center; }
+        
+        /* --- NAVEGACIÓN Y DESPLEGABLES --- */
+        nav { background-color: #34495e; display: flex; justify-content: center; position: sticky; top: 0; z-index: 1000; }
+        nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
+        nav li { position: relative; }
+        nav a { color: white; padding: 15px 20px; display: block; text-decoration: none; }
+        nav a:hover { background-color: #1abc9c; }
+
+        /* Contenido del menú desplegable */
+        .dropdown-content { display: none; position: absolute; background-color: white; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+        .dropdown-content a { color: #333; padding: 12px 16px; border-bottom: 1px solid #eee; }
+        .dropdown-content a:hover { background-color: #f1f1f1; color: #1abc9c; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* --- CARRUSEL --- */
+        .carousel-container { max-width: 800px; position: relative; margin: 20px auto; overflow: hidden; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .slides { display: flex; transition: transform 0.5s ease-in-out; }
+        .slides img { width: 100%; flex-shrink: 0; height: 400px; object-fit: cover; }
+        
+        /* Botones del carrusel */
+        .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; padding: 15px; cursor: pointer; border: none; font-weight: bold; }
+        .next { right: 0; }
+        .prev { left: 0; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Profe sin aula</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">Inicio</a></li>
+        
+        <li class="dropdown">
+            <a href="#">Blog ▼</a>
+            <div class="dropdown-content">
+                <a href="#">Últimos artículos</a>
+                <a href="#">Categorías</a>
+            </div>
+        </li>
+
+        <li class="dropdown">
+            <a href="#">Recursos ▼</a>
+            <div class="dropdown-content">
+                <a href="#">Guías PDF</a>
+                <a href="#">Ejercicios</a>
+            </div>
+        </li>
+
+        <li class="dropdown"><a href="#">Menú 3 ▼</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
+        <li class="dropdown"><a href="#">Menú 4 ▼</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
+        <li class="dropdown"><a href="#">Menú 5 ▼</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
+        <li class="dropdown"><a href="#">Menú 6 ▼</a><div class="dropdown-content"><a href="#">Próximamente</a></div></li>
+    </ul>
+</nav>
+
+<div class="carousel-container">
+    <div class="slides" id="slides">
+        <img src="https://via.placeholder.com/800x400?text=Imagen+1" alt="Imagen 1">
+        <img src="https://via.placeholder.com/800x400?text=Imagen+2" alt="Imagen 2">
+        <img src="https://via.placeholder.com/800x400?text=Imagen+3" alt="Imagen 3">
+        <img src="https://via.placeholder.com/800x400?text=Imagen+4" alt="Imagen 4">
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</div>
+
+<script>
+    let index = 0;
+    function moveSlide(step) {
+        const slides = document.getElementById('slides');
+        const totalSlides = document.querySelectorAll('.slides img').length;
+        index = (index + step + totalSlides) % totalSlides;
+        slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+    // Auto-reproducción cada 5 segundos
+    setInterval(() => moveSlide(1), 5000);
+</script>
+
+</body>
+</html>
