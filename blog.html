@@ -8,7 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
     <style>
-        /* Estilos específicos para las tarjetas del blog */
+        /* Mantenemos el tamaño de fuente global de tus proyectos */
+        body {
+            font-size: 20pt; 
+        }
+
+        /* Estilos para que las tarjetas no rompan la estética del sitio */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -49,11 +54,11 @@
             margin-top: 0;
             font-family: 'Fredoka', sans-serif;
             font-size: 1.4rem;
-            color: #002d5a; /* Color que manejas en tus proyectos */
+            color: #002d5a;
         }
 
         .card-content p {
-            font-size: 16px;
+            font-size: 16px; /* Texto descriptivo ligeramente más pequeño para equilibrio visual */
             color: #555;
             line-height: 1.5;
         }
@@ -68,11 +73,6 @@
             border-radius: 5px;
             font-weight: bold;
             font-size: 14px;
-        }
-
-        /* Ajuste para que el texto sea legible (20pt) como en tus otros trabajos */
-        body {
-            font-size: 20pt; 
         }
     </style>
 </head>
@@ -110,8 +110,6 @@
 </nav>
 
 <main>
-    <h2 style="text-align: center; margin-top: 30px; font-family: 'Fredoka', sans-serif;">Artículos y Publicaciones</h2>
-    
     <div class="blog-grid">
         <article class="card">
             <img src="img/foto1.jpg" alt="Análisis Factorial" class="card-img">
@@ -126,27 +124,21 @@
             <img src="img/foto2.jpg" alt="Psicología Social" class="card-img">
             <div class="card-content">
                 <h2>Estrategias de Intervención</h2>
-                <p>Perfil de competencias y selección de indicadores cuantitativos y cualitativos en psicología social.</p>
+                <p>Perfil de competencias y selección de indicadores en psicología social.</p>
                 <a href="#" class="btn-leer">Leer más</a>
             </div>
         </article>
 
         <article class="card">
-            <img src="img/foto3.jpg" alt="Recursos" class="card-img">
+            <img src="img/foto3.jpg" alt="Próximamente" class="card-img">
             <div class="card-content">
                 <h2>Próximamente</h2>
-                <p>Nuevos materiales educativos para educación superior y psicopedagogía.</p>
+                <p>Nuevos materiales educativos para educación superior.</p>
                 <a href="#" class="btn-leer">Próximamente</a>
             </div>
         </article>
     </div>
 </main>
-
-<footer>
-    <p style="text-align: center; margin-top: 50px; font-size: 0.8em; border-top: 1px solid #ccc; padding-top: 20px;">
-        Edgar Alfonso Naranjo Pineda | Profe sin aula
-    </p>
-</footer>
 
 <script src="script.js"></script>
 </body>
