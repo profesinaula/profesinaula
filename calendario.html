@@ -1,201 +1,50 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario Interactivo - Profe sin aula</title>
-    <link rel="icon" type="image/png" href="favicon.png"> 
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilos.css">
-    <style>
-        .calendar-section {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            font-family: 'Montserrat', sans-serif;
-        }
+const eventos = {
+    // Enero
+    "0-4":   { text: "Día del Braille", cat: "psico" },
+    "0-13":  { text: "Lucha contra la Depresión", cat: "salud" },
+    "0-20":  { text: "Justicia Social", cat: "psico" },
 
-        .calendar-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            background: #002d5a;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
+    // Febrero
+    "1-18":  { text: "Día del Asperger", cat: "psico" },
+    "1-20":  { text: "Justicia Social (Mundial)", cat: "psico" },
 
-        .calendar-controls button {
-            background: white;
-            border: none;
-            color: #002d5a;
-            padding: 5px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+    // Marzo
+    "2-1":   { text: "Cero Discriminación", cat: "psico" },
+    "2-8":   { text: "Día de la Mujer", cat: "psico" },
+    "2-21":  { text: "Síndrome de Down", cat: "psico" },
 
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            background: #fff;
-            border: 1px solid #002d5a;
-            padding: 10px;
-            border-radius: 8px;
-        }
+    // Abril
+    "3-2":   { text: "Concienciación Autismo", cat: "psico" },
+    "3-7":   { text: "Día Mundial Salud (OMS)", cat: "salud" },
+    "3-25":  { text: "Lucha contra Maltrato Infantil", cat: "salud" },
+    "3-28":  { text: "Seguridad y Salud Trabajo", cat: "salud" },
 
-        .day-name {
-            font-weight: bold;
-            color: #002d5a;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 14px;
-        }
+    // Mayo
+    "4-17":  { text: "Día contra Homofobia/Transfobia", cat: "psico" },
+    "4-20":  { text: "Día del Psicólogo (México)", cat: "psico" },
 
-        .day {
-            min-height: 90px;
-            border: 1px solid #eee;
-            padding: 5px;
-            font-size: 13px;
-            background: #f9f9f9;
-            display: flex;
-            flex-direction: column;
-        }
+    // Junio
+    "5-15":  { text: "Contra Abuso en la Vejez", cat: "psico" },
+    "5-26":  { text: "Prevención de Adicciones", cat: "salud" },
 
-        .day.today { border: 2px solid #002d5a; background: #eef6ff; }
+    // Julio
+    "6-13":  { text: "Día Internacional del TDAH", cat: "psico" },
+    "6-24":  { text: "Día del Autocuidado", cat: "salud" },
 
-        /* Categorías */
-        .evento {
-            font-size: 10px;
-            margin-top: 4px;
-            padding: 2px 4px;
-            border-radius: 3px;
-            color: #333;
-            font-weight: bold;
-        }
-        .psico { background: #e3f2fd; border-left: 3px solid #2196f3; }
-        .salud { background: #e8f5e9; border-left: 3px solid #4caf50; }
+    // Septiembre
+    "8-10":  { text: "Prevención del Suicidio", cat: "salud" },
+    "8-21":  { text: "Día del Alzheimer", cat: "salud" },
 
-        .leyenda {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-            font-size: 12px;
-        }
-    </style>
-</head>
-<body>
+    // Octubre
+    "9-10":  { text: "Día Mundial Salud Mental", cat: "salud" },
+    "9-15":  { text: "Cuidado del Cuidador", cat: "psico" },
+    "9-23":  { text: "Aniversario NOM-035 (MX)", cat: "psico" },
 
-<header>
-    <h1>Profe sin aula</h1>
-</header>
+    // Noviembre
+    "10-19": { text: "Prevención Abuso Infantil", cat: "salud" },
+    "10-25": { text: "Eliminación Violencia Género", cat: "psico" },
 
-<nav>
-    <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li class="dropdown"><a href="blog.html">Blog</a></li>
-        <li class="dropdown"><a href="#">Recursos</a></li>
-        <li class="dropdown"><a href="#">Menú 3</a></li>
-    </ul>
-</nav>
-
-<main class="calendar-section">
-    <div class="calendar-controls">
-        <button id="prevMonth">&#10094; Anterior</button>
-        <h2 id="monthDisplay" style="margin:0; font-family:'Fredoka'"></h2>
-        <button id="nextMonth">Siguiente &#10095;</button>
-    </div>
-
-    <div id="calendarGrid" class="calendar-grid">
-        </div>
-
-    <div class="leyenda">
-        <span><b style="color:#2196f3">■</b> Psicología/Social</span>
-        <span><b style="color:#4caf50">■</b> Salud Mental/Global</span>
-    </div>
-</main>
-
-<script>
-    const monthDisplay = document.getElementById('monthDisplay');
-    const calendarGrid = document.getElementById('calendarGrid');
-    const prevBtn = document.getElementById('prevMonth');
-    const nextBtn = document.getElementById('nextMonth');
-
-    let currentDate = new Date();
-
-    // Base de datos de fechas (puedes agregar más aquí)
-    const eventos = {
-        "0-4": { text: "Día del Braille", cat: "psico" },
-        "0-13": { text: "Lucha contra Depresión", cat: "salud" },
-        "1-15": { text: "Cáncer Infantil", cat: "salud" },
-        "1-18": { text: "Día del Asperger", cat: "psico" },
-        "2-8": { text: "Día de la Mujer", cat: "psico" },
-        "2-21": { text: "Síndrome de Down", cat: "psico" },
-        "3-2": { text: "Concienciación Autismo", cat: "psico" },
-        "3-7": { text: "Día Mundial Salud", cat: "salud" },
-        "4-17": { text: "Lucha contra Discriminación", cat: "psico" },
-        "4-20": { text: "Día del Psicólogo (MX)", cat: "psico" },
-        "5-26": { text: "Lucha contra Drogas", cat: "salud" },
-        "6-13": { text: "Día del TDAH", cat: "psico" },
-        "8-10": { text: "Prevención Suicidio", cat: "salud" },
-        "8-21": { text: "Día del Alzheimer", cat: "salud" },
-        "9-10": { text: "Día Salud Mental", cat: "salud" },
-        "9-23": { text: "Aniversario NOM-035", cat: "psico" },
-        "10-25": { text: "Violencia Género", cat: "psico" },
-        "11-3": { text: "Día de la Discapacidad", cat: "psico" },
-        "11-10": { text: "Derechos Humanos", cat: "psico" }
-    };
-
-    function renderCalendar() {
-        calendarGrid.innerHTML = '';
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
-
-        const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        monthDisplay.innerText = `${nombresMeses[month]} ${year}`;
-
-        // Encabezados
-        ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"].forEach(d => {
-            const div = document.createElement('div');
-            div.className = 'day-name';
-            div.innerText = d;
-            calendarGrid.appendChild(div);
-        });
-
-        const firstDay = new Date(year, month, 1).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-        // Espacios vacíos
-        for (let i = 0; i < firstDay; i++) {
-            const empty = document.createElement('div');
-            empty.className = 'day';
-            calendarGrid.appendChild(empty);
-        }
-
-        // Días del mes
-        for (let d = 1; d <= daysInMonth; d++) {
-            const dayDiv = document.createElement('div');
-            dayDiv.className = 'day';
-            dayDiv.innerHTML = `<b>${d}</b>`;
-
-            const key = `${month}-${d}`;
-            if (eventos[key]) {
-                const ev = document.createElement('div');
-                ev.className = `evento ${eventos[key].cat}`;
-                ev.innerText = eventos[key].text;
-                dayDiv.appendChild(ev);
-            }
-            calendarGrid.appendChild(dayDiv);
-        }
-    }
-
-    prevBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
-    nextBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
-
-    renderCalendar();
-</script>
-</body>
-</html>
+    // Diciembre
+    "11-3":  { text: "Día de la Discapacidad", cat: "psico" },
+    "11-10": { text: "Día Derechos Humanos", cat: "psico" }
+};
