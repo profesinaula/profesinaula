@@ -91,3 +91,24 @@ nav a:hover { background-color: #2980b9; }
 .prev:hover, .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
+/* Esto asegura que la tira sea flexible y no tenga espacios extra */
+.slides {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+    margin: 0;
+    padding: 0;
+}
+
+/* Esto obliga a cada imagen a ser una unidad individual perfecta */
+.slides img {
+    width: 100% !important;     /* Obliga a medir el 100% del cuadro */
+    min-width: 100% !important; /* Prohíbe que mida menos de eso */
+    max-width: 100% !important; /* Prohíbe que mida más de eso */
+    height: 450px !important;    /* Altura fija para todas */
+    object-fit: cover;          /* Llena el espacio recortando lo necesario */
+    flex-shrink: 0;             /* VITAL: Evita que las fotos se empujen entre sí */
+    display: block;
+    box-sizing: border-box;     /* Evita que bordes o sombras sumen milímetros extra */
+}
